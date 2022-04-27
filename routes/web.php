@@ -13,6 +13,7 @@ Route::group(['middleware' => ['auth']],function() {
         Route::group(['middleware' => ['role:admin']],function() { 
 
             Route::get('/judRestore/{id}', 'JudgesController@restore')->name('jud.restore');
+            Route::get('/restore/{id}/', 'ContestantController@restore')->name('contestant.restore');
             Route::get('/crtRestore/{id}/{programs_id}', 'CriteriaController@restore')->name('crt.restore');
             Route::post('/destroyCrt/{crt_id}/{programs_id}/{event_id}', 'CriteriaController@destroy');
             Route::post('/crt/update/{crt_id}', 'CriteriaController@update');
@@ -29,7 +30,9 @@ Route::group(['middleware' => ['auth']],function() {
             Route::resource('users','UsersController');     
             Route::resource('program','ProgramController');   
             Route::resource('event','EventController');  
-            Route::resource('judges','JudgesController');         
+            Route::resource('judges','JudgesController');
+            Route::resource('score','ScoreController');  
+            Route::resource('contestant','ContestantController');         
         });
     });    
 });

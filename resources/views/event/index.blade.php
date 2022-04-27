@@ -52,6 +52,8 @@
 									<tr>
 										<th>#</th>
 										<th>Event Name</th>
+										<th>PDF</th>
+										<th>Status</th>
 										{{-- <th style="width: 15%;text-align:center;">PDF</th> --}}
 										<th width="9%">Action</th>
 									</tr>
@@ -61,7 +63,8 @@
                                     <tr>
                                         <td>{{ $event->id ?? '' }}</td>
                                         <td>{{ $event->event_name ?? '' }}</td>
-										
+										<td><button class="btn btn-primary">Print</button></td>
+										<td><button class="btn btn-danger btn-pill">Pending</button></td>
 										{{-- <td style="width: 15%;text-align:center;">
 											<a  class="btn btn-info" target="_blank" href="{{ URL::to('/ResultbyEvent/'.$event->id) }}">
 												<i class="cil-print"></i>

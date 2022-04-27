@@ -13,15 +13,21 @@
 
   <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link" href="{{ route('judges.index') }}">
-      <i class="cil-speedometer c-sidebar-nav-icon"></i>
+      <i class="cil-user c-sidebar-nav-icon"></i>
       Judges
     </a>
   </li>
 
   <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="{{ route('program.index') }}">
+    <a class="c-sidebar-nav-link" href="{{ route('contestant.index') }}">
       <i class="cil-speedometer c-sidebar-nav-icon"></i>
       Contestant
+    </a>
+  </li>
+  <li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link" href="{{ route('score.index') }}">
+      <i class="cil-speedometer c-sidebar-nav-icon"></i>
+      Score
     </a>
   </li>
 
@@ -126,7 +132,12 @@
       </a>
     </li> --}}
   @endrole
-
+  <li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link" href="{{ route('users.index') }}">
+      <i class="cil-people c-sidebar-nav-icon"></i>
+      User
+    </a>
+  </li>
   <li class="c-sidebar-nav-item">
     <form action="{{ url('/logout') }}" method="POST"> @csrf 
       <span class="c-sidebar-nav-link logout-link" style="cursor:pointer">
