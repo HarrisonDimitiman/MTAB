@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Score;
+use App\Models\{Score, Contestant, Criteria, Event};
 use Illuminate\Http\Request;
 
 class ScoreController extends Controller
@@ -14,7 +14,10 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        return view('score.index');
+        $contestant = Contestant::orderBy('number', 'ASC')->get();
+        $criteria = Criteria::get();
+        $event = Event::get();
+        return view('score.index', compact('contestant', 'criteria', 'event'));
     }
 
     /**

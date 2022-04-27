@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contestant;
+use App\Models\{Contestant, Criteria, Event};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
@@ -79,7 +79,9 @@ class ContestantController extends Controller
      */
     public function show(Contestant $contestant)
     {
-        //
+        $criteria = Criteria::get();
+        $event = Event::get();
+        return view('score._showScoring',compact('contestant', 'criteria', 'event'));
     }
 
     /**
