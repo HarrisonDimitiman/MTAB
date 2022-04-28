@@ -4,16 +4,16 @@
         <form action="{{ URL::to('/addCriteria') }}" method="post">
           @csrf 
               <div class="modal-header">
-                <h4><i class="bi bi-justify"></i>{{ __(' Create Criteria') }}</h4>
+                <h4><i class="bi bi-justify"></i>{{ __(' Create Sub-Criteria') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <label for="program">Criteria Name:</label>
+                <label for="program">Name:</label>
                 {{-- <input type="hidden" name="programs_id" value="{{ $prgms_id }}"> --}}
                 <input type="text" required class="form-control" name="crt_name">
-                <label for="program">Criteria Score:</label>
+                <label for="program">Percentage:</label>
                 {{-- <input type="hidden" name="programs_id" value="{{ $prgms_id }}"> --}}
                 <input type="number" required class="form-control" name="crt_score" max="100">
                 <input type="hidden" required class="form-control" name="event_id" value="{{ $event->id }}">

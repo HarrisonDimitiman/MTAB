@@ -62,7 +62,7 @@
                                         <tr>
                                             <td>{{ ++$i}}</td>
                                             <td>
-                                                <img src="{{asset('contestant/'.$contestants->image) }}" alt="image"  align="left">
+                                                <img src="{{asset('public/'.$contestants->image) }}" width="70" height="70"alt="image"  align="left">
                                             </td>
                                             <td>{{ $contestants->name ?? '' }}</td>
                                             <td>{{ $contestants->age ?? '' }}</td>

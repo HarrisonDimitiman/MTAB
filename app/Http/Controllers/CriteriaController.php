@@ -25,12 +25,22 @@ class CriteriaController extends Controller
 
     public function addCriteria(Request $request)
     {
-        $crit = new Criteria();
-        $crit->crt_name = $request->crt_name;
-        $crit->crt_score = $request->crt_score;
-        $crit->event_id = $request->event_id;
-        $crit->save();
-        return redirect()->back()->with('success','Successfully Created Criteria');
+        $countsum = Criteria::sum('crt_score');
+        //    dd($count);
+            $totalAll = $countsum +  $request->crt_score;
+            
+            if($totalAll <= 100){
+                    $judges = new Criteria();
+                    $judges->crt_name = $request->crt_name;
+                    $judges->crt_score = $request->crt_score;
+                    $judges->event_id = $request->event_id;
+                    $judges->save();
+                    return redirect()->back()->with('success','Successfully Created Sub=Criteria');
+            }
+            else
+            {
+                    return redirect()->back()->with('error','Sub-Criteria Percentage Exceeded 100%!!!');
+            }
     }
 
     /**

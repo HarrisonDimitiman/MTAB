@@ -21,7 +21,7 @@
                                                 <div class="input-group-text">
                                                     {{ $contestant->number }}
                                                 </div>
-                                                    <input type="text" class="form-control"  placeholder="{{ $contestant->name }}" disabled >
+                                                    <input type="text" class="form-control font-weight-bold"  placeholder="{{ $contestant->name }}" disabled >
                                             </div>
                                         @endforeach
                                     </div>
@@ -46,7 +46,7 @@
 @endsection
 @section('script')
     <script>
-        $("#criteriaSelect").hide();
+       
         // $("#contestant").click(function(){
         //     $("#contestant-card").show();
         // });
@@ -65,26 +65,5 @@
 			    }
 			});
         });
-
-
-        $("#criteria").click(function(){
-            $("#criteriaSelect").show();
-        });
-        $(".close-card").click(function(){
-            $("#contestant-card").hide();
-        });
-        $('.btn-submit').click(function(e){
-			swal ({
-			    title: "Are you sure?",
-			      text: "Are you sure you want to submit this ?!",
-			      icon: "warning",
-			      buttons: true,
-			      dangerMode: true,
-			}).then((result) => {
-				if (result) {
-					$(this).closest('form').submit();
-				}
-			})
-		});
     </script>
 @endsection

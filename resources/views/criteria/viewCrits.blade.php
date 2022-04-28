@@ -6,8 +6,8 @@
     <nav aria-label="breadcrumb" role="navigation">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ URL::to('/program/') }}">Program</a></li>
-        <li class="breadcrumb-item"><a href="{{ URL::to('/event/'.$programs_id) }}">Event</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Criteria</li>
+        <li class="breadcrumb-item"><a href="{{ URL::to('/event/'.$programs_id) }}">Criterea</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sub-Criteria</li>
     </ol>
     </nav>
     <div class="fadeIn">
@@ -17,7 +17,7 @@
                     <div class="card-header d-flex">
                     <h4>
                         <i class="fa fa-align-justify"></i>
-                        Criterea for {{ $event->event_name }}</h4>
+                        Sub-Criterea for {{ $event->event_name }}</h4>
                         <button class="btn btn-primary ml-auto" type="button" data-toggle="modal" data-target="#eventModal">
                             <i class="cil-plus"></i>
                             Create
@@ -40,15 +40,15 @@
                             <thead>
                                 <tr>
                                     <th width="5%">#</th>
-                                    <th>Criteria</th>
-                                    <th width="15%" style="text-align:center;">Objective</th>
+                                    <th>Sub-Criteria</th>
+                                    <th width="15%" style="text-align:center;">Percentage</th>
                                     <th width="9%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($allCrits as $allCrits)   
+                                @foreach($allCrits as $i => $allCrits)   
                                     <tr>
-                                        <td width="5%">{{ $allCrits->id ?? '' }}</td>
+                                        <td width="5%">{{++$i}}</td>
                                         <td>{{ $allCrits->crt_name ?? '' }}</td>
                                         <td width="15%" style="text-align:center;">{{ $allCrits->crt_score ?? '' }}%</td>
                                         <td style="width: 9%;">

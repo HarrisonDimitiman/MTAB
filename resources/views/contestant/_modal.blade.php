@@ -11,7 +11,7 @@
           <div class="modal-body">  
           <div class="row">
                   <div class="col-2">
-                    <img src="" alt="" id="imageShow" height="120" width="120"style=" border: 1px solid #555;align:left;">
+                    <img src="{{asset('public/'.$contestant->image) }}" alt="" id="imageShow" height="120" width="120"style=" border: 1px solid #555;align:left;">
                   </div>
                   <div class="col-10">
                     <label for="program">Name:</label>

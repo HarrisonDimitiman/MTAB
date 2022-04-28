@@ -7,7 +7,7 @@
 <nav aria-label="breadcrumb" role="navigation">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ URL::to('/program/') }}">Program</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Event</li>
+    <li class="breadcrumb-item active" aria-current="page">Criteria</li>
   </ol>
 </nav>
 		<div class="fadeIn">
@@ -18,7 +18,7 @@
 						<div class="card-header d-flex">
 						<h4>
 							<i class="fa fa-align-justify"></i>
-							 {{ __('Event Management for') }} {{ $prgm->name }}</h4>
+							 {{ __('Criteria Management for') }} {{ $prgm->name }}</h4>
 							<button class="btn btn-primary ml-auto" type="button" data-toggle="modal" data-target="#eventModal">
 								<i class="cil-plus"></i>
 								Create
@@ -51,10 +51,9 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>Event Name</th>
-										<th>PDF</th>
-										<th>Status</th>
-										{{-- <th style="width: 15%;text-align:center;">PDF</th> --}}
+										<th>Criteria Name</th>
+										<th width="15%">Status</th>
+										<th width="15%">PDF</th>
 										<th width="9%">Action</th>
 									</tr>
 								</thead>
@@ -63,14 +62,8 @@
                                     <tr>
                                         <td>{{ $event->id ?? '' }}</td>
                                         <td>{{ $event->event_name ?? '' }}</td>
-										<td><button class="btn btn-primary">Print</button></td>
-										<td><button class="btn btn-danger btn-pill">Pending</button></td>
-										{{-- <td style="width: 15%;text-align:center;">
-											<a  class="btn btn-info" target="_blank" href="{{ URL::to('/ResultbyEvent/'.$event->id) }}">
-												<i class="cil-print"></i>
-												&nbsp;Print
-											</a>
-										</td> --}}
+										<td><span class="badge badge-danger">Pending</span></td>
+										<td><button class="btn btn-info"> <i class="cil-print"></i> Print</button></td>
                                         <td style="width: 9%;">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -83,7 +76,7 @@
                                                         </button>
                                                         <a type="button" href="{{ URL::to('/viewCrits/'.$event->id.'/'.$programs_id) }}"class="dropdown-item btn" data-url="">
                                                             <i class="cil-magnifying-glass"></i>
-                                                            &nbsp;View Criteria
+                                                            &nbsp;View Sub-Criteria
                                                         </a>
                                                         {{-- <a type="button" href="{{ URL::to('/viewJudges/'.$event->id.'/'.$programs_id) }}"class="dropdown-item btn" data-url="">
                                                             <i class="cil-magnifying-glass"></i>

@@ -1,5 +1,5 @@
 <div class="card text-dark bg-light mb-3" id="contestant-card">
-    <div class="card-header">Contestant #
+    <div class="card-header">Contestant # {{ $contestant->number }}
         <button class="btn btn-sm btn-info close-card float-right">Close</button>
     </div>
     <div class="card-body">
@@ -9,20 +9,20 @@
             </div>
             <div class="col-9">
                 <div class="row mb-3">
-                    <div class="col-8">Name: {{ $contestant->name }}</div>
-                    <div class="col-4">Birthdate: {{ $contestant->birthdate }}</div>
+                    <div class="col-8"> <b>Name:</b> {{ $contestant->name }}</div>
+                    <div class="col-4"> <b>Birthdate:</b> {{ $contestant->birthdate }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-8">Location: {{ $contestant->location }}</div>
-                    <div class="col-4">Age: {{ $contestant->age }}</div>
+                    <div class="col-8"> <b>Location:</b> {{ $contestant->location }}</div>
+                    <div class="col-4"> <b>Age:</b> {{ $contestant->age }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-6">Vital Statistic: {{ $contestant->vital_stat }}</div>
-                    <div class="col-3">Weight: {{ $contestant->weight }}</div>
-                    <div class="col-3">Height: {{ $contestant->height }}</div>
+                    <div class="col-6"> <b>Vital Statistic:</b> {{ $contestant->vital_stat }}</div>
+                    <div class="col-3"> <b>Weight:</b> {{ $contestant->weight }}</div>
+                    <div class="col-3"> <b>Height:</b> {{ $contestant->height }}</div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col">Educational Attainment: {{ $contestant->educational }}</div>
+                    <div class="col"> <b>Educational Attainment:</b> {{ $contestant->educational }}</div>
                     
                 </div>
             </div>
@@ -56,3 +56,26 @@
         </div>
     </div>
 </div>
+
+<script>
+     $("#criteriaSelect").hide();
+     $("#criteria").click(function(){
+            $("#criteriaSelect").show();
+        });
+        $(".close-card").click(function(){
+            $("#contestant-card").hide();
+        });
+        $('.btn-submit').click(function(e){
+			swal ({
+			    title: "Are you sure?",
+			      text: "Are you sure you want to submit this ?!",
+			      icon: "warning",
+			      buttons: true,
+			      dangerMode: true,
+			}).then((result) => {
+				if (result) {
+					$(this).closest('form').submit();
+				}
+			})
+		});
+</script>
