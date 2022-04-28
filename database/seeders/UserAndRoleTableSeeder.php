@@ -24,5 +24,32 @@ class UserAndRoleTableSeeder extends Seeder
         ]);
         $admin->assignRole('admin');
 
+        $admin = User::create([ 
+            'name' => 'judge1',
+            'email' => 'judge1@judge1.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ]);
+        $admin->assignRole('judge');
+
+        $admin = User::create([ 
+            'name' => 'judge2',
+            'email' => 'judge2@judge2.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ]);
+        $admin->assignRole('judge');
+
+        $admin = User::create([ 
+            'name' => 'judge3',
+            'email' => 'judge3@judge3.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ]);
+        $admin->assignRole('judge');
+
     }
 }

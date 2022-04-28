@@ -30,37 +30,32 @@
         <hr>
         <div class="">
             <label for="criteria">Criteria</label>
-            <select class="form-control" style="width:300px;" id="criteria">
+            <select class="form-control" style="width:300px;" id="eventCrits">
                 <option selected disabled>Select Criteria to judge</option>
                 @foreach ($event as $event)
-                    <option value="{{ $event->id }}" >{{ $event->event_name }}</option>
+                    <option value="{{ URL::to('/getCritsEvent/'.$event->id.'/'.$contestant->id) }}" >{{ $event->event_name }}</option>
                 @endforeach
                 
             </select>
             
-            <div class="row mt-2" id="criteriaSelect">
-               <div class="col-10">
-               <label class=""for="score">Sub Criteria</label>
-                    <div class="input-group mb-1" style="width:600px;">
-                        <div class="input-group-text">1</div>
-                            <input type="text" class="form-control font-weight-bold" placeholder="Relevance to the theme - 30%" disabled >
-                    </div>
-                </div>
-                <div class="col-2" style="width:2px;">
-                <label class=""for="score">Score</label>
-                    <input type="number" class="form-control font-weight-bold text-center" >
-               </div>
-               <button class="btn btn-primary btn-sm ml-auto p-2 mt-3 btn-submit">Submit</button>
-            </div>
-            
+            <div class="row mt-2 criteriaSelect"></div>
         </div>
     </div>
 </div>
 
 <script>
-     $("#criteriaSelect").hide();
-     $("#criteria").click(function(){
-            $("#criteriaSelect").show();
+        // $(".criteriaSelect").hide();
+        $("#eventCrits").on('change', function (){
+            var div = $('.criteriaSelect');
+			div.empty();
+            var url = $(this).val();
+            $.ajax({
+			    url: url,
+			    success:function(data){
+			        div.append(data);
+                    // $('#critShowScoring').show();
+			    }
+			});
         });
         $(".close-card").click(function(){
             $("#contestant-card").hide();

@@ -8,10 +8,12 @@ Route::group(['middleware' => ['auth']],function() {
 
     Route::get('/dashboard','DashboardController@index')->name('dashboard.index');
       
-    Route::group(['middleware' => ['role:admin']],function() { 
+    Route::group(['middleware' => ['role:admin|judge']],function() { 
 
-        Route::group(['middleware' => ['role:admin']],function() { 
+        Route::group(['middleware' => ['role:admin|judge']],function() { 
 
+            Route::post('/saveScore/{jUser_id}/{event_id}/{contestant_id}', 'ScoreController@saveScore');
+            Route::get('/getCritsEvent/{event_id}/{contestant_id}', 'ScoreController@getCritsEvent');
             Route::get('/judRestore/{id}', 'JudgesController@restore')->name('jud.restore');
             Route::get('/restore/{id}/', 'ContestantController@restore')->name('contestant.restore');
             Route::get('/crtRestore/{id}/{programs_id}', 'CriteriaController@restore')->name('crt.restore');

@@ -77,7 +77,7 @@ class ContestantController extends Controller
      */
     public function show(Contestant $contestant)
     {
-        $criteria = Criteria::get();
+        $criteria = array();
         $event = Event::get();
         return view('score._showScoring',compact('contestant', 'criteria', 'event'));
     }
