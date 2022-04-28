@@ -13,6 +13,9 @@
                 <label for="program">Event Name:</label>
                 <input type="hidden" name="programs_id" value="{{ $programs_id }}">
                 <input type="text" required class="form-control" name="event_name">
+
+                <label for="program">Event Percentage:</label>
+                <input type="number" required class="form-control" name="event_percentage">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

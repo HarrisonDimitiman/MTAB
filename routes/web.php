@@ -12,6 +12,7 @@ Route::group(['middleware' => ['auth']],function() {
 
         Route::group(['middleware' => ['role:admin|judge']],function() { 
 
+            Route::get('/generateTop6', 'SemiController@generateTop6');
             Route::post('/saveScore/{jUser_id}/{event_id}/{contestant_id}', 'ScoreController@saveScore');
             Route::get('/getCritsEvent/{event_id}/{contestant_id}', 'ScoreController@getCritsEvent');
             Route::get('/judRestore/{id}', 'JudgesController@restore')->name('jud.restore');

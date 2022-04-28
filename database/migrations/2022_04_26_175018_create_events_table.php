@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('programs_id');
             $table->string('event_name');
+            $table->double('percentage');
             $table->timestamps();
             $table->softDeletes();
             

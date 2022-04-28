@@ -50,6 +50,7 @@ class EventController extends Controller
         $event=new Event();
         $event->event_name = $request->event_name;
         $event->programs_id = $request->programs_id;
+        $event->percentage = $request->event_percentage;
         $event->save();
 
         return redirect()->back()->with('success','Successfully Created Event');
@@ -93,6 +94,7 @@ class EventController extends Controller
         $getEvents = Event::where('id', $events_id)->first();
         $upEvents = array();
         $upEvents['event_name'] = $request->event_name;
+        $upEvents['percentage'] = $request->event_percentage;
         DB::table('events')->where('id', $events_id)->update($upEvents);
 
         return redirect()->back()->with('success','Successfully Updated Event');

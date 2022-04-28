@@ -46,13 +46,13 @@
         
     </div>
     @if($value == 0)
-    <button class="btn btn-primary btn-sm float-right mt-2 btn-submit" type="submit">Submit</button>
+        <button class="btn btn-primary btn-sm float-right mt-2" type="submit">Submit</button>
     @elseif ($value == 1)
-    <button class="btn btn-primary btn-sm float-right mt-2" disabled>Done Scoring</button>
+        <button class="btn btn-primary btn-sm float-right mt-2" disabled>Done Scoring</button>
     @endif
     
 </form>
-<script>
+{{-- <script>
     $('.btn-submit').click(function(e){
 			swal ({
 			    title: "Are you sure?",
@@ -66,4 +66,4 @@
 				}
 			})
 		});
-</script>
+</script> --}}

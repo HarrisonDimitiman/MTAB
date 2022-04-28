@@ -19,6 +19,7 @@ class ScoreController extends Controller
         $contestant = Contestant::orderBy('number', 'ASC')->get();
         $criteria = array();
         $event = Event::get();
+
         return view('score.index', compact('contestant', 'criteria', 'event'));
     }
 
@@ -62,6 +63,14 @@ class ScoreController extends Controller
         $scoreLength = count($score);
         $scoreSum = array_sum($score);
 
+        $ifAlreadyScore = Score::where('event_id', $event_id)
+                            ->where('contestant_id', $contestant_id)
+                            ->where('user_id', Auth::user()->id)
+                            ->count();
+
+        $getEventPercentage = Event::where('id', $event_id)->first();
+        $totalEvent = $scoreSum * $getEventPercentage->percentage;
+
         for($i = 1; $i <= $crtLength; $i++)
         {
             $data = array();
@@ -69,12 +78,56 @@ class ScoreController extends Controller
             $data['crit_id'] = $crt_id[$i];
             $data['event_id'] = $event_id;
             $data['contestant_id'] = $contestant_id;
-            $data['total'] = $scoreSum;
+            $data['total'] = $totalEvent;
+            $data['overAllTotal'] = 0;
             $data['score'] = $score[$i];
 
             DB::table('scores')
                 ->insert($data);
         }
+
+
+        $ifAlreadyScoreByEvent = Score::where('contestant_id', $contestant_id)
+                            ->where('user_id', Auth::user()->id)
+                            ->get()
+                            ->keyBy('event_id');
+
+        $ifAlreadyScoreByEventP2 = Score::where('contestant_id', $contestant_id)
+                            ->where('user_id', Auth::user()->id)
+                            ->get()
+                            ->keyBy('event_id');                    
+
+        $countEvent = Event::count();
+
+        
+        $sum=array();
+        foreach($ifAlreadyScoreByEventP2 as $ifAlreadyScoreByEventP2)
+        {
+            $sum[] = $ifAlreadyScoreByEventP2->total;
+        }
+        $sumOverAll = array_sum($sum);
+        
+
+        // UPDATE FOR OVERALL TOTAL
+        if($ifAlreadyScoreByEvent->count() == $countEvent)
+        {
+            
+            $getLatestScore = Score::where('contestant_id', $contestant_id)
+                    ->where('user_id', Auth::user()->id)
+                    ->latest('id')
+                    ->first();
+            $data2 = array();
+            $data2['overAllTotal'] = $sumOverAll;
+
+            // DB::table('scores')
+            //     ->where('id', $getLatestScore->id)
+            //     ->update($data2);
+            Score::query()->where('contestant_id', $contestant_id)->update($data2);
+           
+        }
+
+
+
         return redirect()->back()->with('success','Successfull');
     }
 

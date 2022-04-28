@@ -19,8 +19,10 @@ class CreateScoresTable extends Migration
             $table->unsignedBigInteger('crit_id');
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('contestant_id');
-            $table->string('total');
-            $table->string('score');
+            $table->double('total');
+            $table->double('overAllTotal')->nullable();
+            $table->double('overAllTotalJudge')->nullable();
+            $table->double('score');
             $table->timestamps();
 
             $table->foreign('user_id')

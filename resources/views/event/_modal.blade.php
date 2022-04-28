@@ -11,6 +11,9 @@
           <div class="modal-body">
             <label for="program">Event Name:</label>
             <input type="text" name="event_name" class="form-control mb-3" required placeholder="{{ $getEvents->event_name }}" value="{{ $getEvents->event_name }}">
+
+            <label for="program">Event Percentage:</label>
+            <input type="text" name="event_percentage" class="form-control mb-3" required placeholder="{{ $getEvents->percentage }}" value="{{ $getEvents->percentage }}">
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>

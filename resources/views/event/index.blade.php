@@ -52,6 +52,7 @@
 									<tr>
 										<th>#</th>
 										<th>Criteria Name</th>
+										<th>Percentage</th>
 										<th width="15%">Status</th>
 										<th width="15%">PDF</th>
 										<th width="9%">Action</th>
@@ -62,6 +63,7 @@
                                     <tr>
                                         <td>{{ $event->id ?? '' }}</td>
                                         <td>{{ $event->event_name ?? '' }}</td>
+										<td>{{ $event->percentage ?? '' }}</td>
 										<td><span class="badge badge-danger">Pending</span></td>
 										<td><a  class="btn btn-info" target="_blank" href="{{ URL::to('/ResultbyEvent/') }}">
 												<i class="cil-print"></i>

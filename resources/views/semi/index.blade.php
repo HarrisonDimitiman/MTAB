@@ -10,20 +10,18 @@
                         <div class="card-header d-flex">
                         <h4>
                             <i class="fa fa-align-justify"></i>
-                             {{ __('Selection of Top 6 Management') }}</h4>      		
+                             {{ __('Selection of Top 6 Management') }}
+                        </h4>      	
+                        <a href="{{ URL::to('/generateTop6') }}" class="ml-auto"><button class="btn btn-primary ml-auto" style="float:right;">Generate Top 6</button></a>	
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-3">
                                     <div class="row" >
-                                       
-                                            <div class="input-group mb-1 semi" data-url="">
-                                                <div class="input-group-text">
-                                                    
-                                                </div>
-                                                    <input type="text" class="form-control font-weight-bold"  placeholder="" disabled >
-                                            </div>
-                                       
+                                        <div class="input-group mb-1 semi" data-url="">
+                                            <div class="input-group-text"></div>
+                                            <input type="text" class="form-control font-weight-bold"  placeholder="" disabled >
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-9">
