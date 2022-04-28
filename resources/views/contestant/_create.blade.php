@@ -46,7 +46,7 @@
                   </div>
                   <div class="col-6">
                     <label for="program">Contestant Number:</label>
-                    <input type="number"  class="form-control text-center" name="number">
+                    <input type="number"  class="form-control" name="number">
                   </div>
                 </div>
                 <div class="row">

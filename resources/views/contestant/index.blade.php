@@ -62,7 +62,7 @@
                                         <tr>
                                             <td>{{ ++$i}}</td>
                                             <td>
-                                                <img src="{{URL::asset('/uploads/contestant/'.$contestants->image) }}" alt="image"  align="left">
+                                                <img src="{{asset('contestant/'.$contestants->image) }}" alt="image"  align="left">
                                             </td>
                                             <td>{{ $contestants->name ?? '' }}</td>
                                             <td>{{ $contestants->age ?? '' }}</td>

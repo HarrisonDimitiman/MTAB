@@ -13,7 +13,7 @@ class UsersController extends Controller
     {
         $you = auth()->user();
         $users = User::with('roles')->where('id','!=',1)->get();
-        $roles = DB::table('roles')->where('id','!=',2)->get();
+        $roles = DB::table('roles')->get();
         return view('dashboard.admin.usersList', compact('users', 'you', 'roles'));
     }
 
@@ -30,7 +30,7 @@ class UsersController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        $user->assignRole('user');
+        //$user->assignRole('user');
         $user->assignRole($request->role);
         
         return redirect()->back()->with('success','User added successfully!');

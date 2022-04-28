@@ -11,12 +11,12 @@
     </a>
   </li>
 
-  <li class="c-sidebar-nav-item">
+  <!-- <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link" href="{{ route('judges.index') }}">
       <i class="cil-user c-sidebar-nav-icon"></i>
       Judges
     </a>
-  </li>
+  </li> -->
 
   <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link" href="{{ route('contestant.index') }}">
