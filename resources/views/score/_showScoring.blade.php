@@ -1,4 +1,4 @@
-<div class="card text-dark bg-light mb-3" id="contestant-card">
+<div class="card text-dark bg-white mb-3" id="contestant-card" >
     <div class="card-header">Contestant # {{ $contestant->number }}
         <button class="btn btn-sm btn-info close-card float-right">Close</button>
     </div>

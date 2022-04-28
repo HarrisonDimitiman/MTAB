@@ -52,6 +52,7 @@
                                         <th>#</th>
                                         <th>Program</th>
                                         <th>Date</th>
+                                        <th width="10%">Report</th>
                                         <th width="9%">Action</th>
                                     </tr>
                                 </thead>
@@ -61,6 +62,7 @@
                                             <td>{{ $prgms->id ?? '' }}</td>
                                             <td>{{ $prgms->name ?? '' }}</td>
                                             <td>{{ $prgms->date ?? '' }}</td>
+                                            <td><button class="btn btn-info"> <i class="cil-print"></i> Print</button></td>
                                             <td style="width: 9%;">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

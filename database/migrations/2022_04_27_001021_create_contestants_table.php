@@ -18,11 +18,10 @@ class CreateContestantsTable extends Migration
             $table->string('name');
             $table->string('age');
             $table->string('location');
-            $table->string('vital_stat');
             $table->string('height');
             $table->string('weight');
             $table->date('birthdate');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('educational');
             $table->string('number');
             $table->timestamps();

@@ -26,10 +26,7 @@
                     <label for="program">Age:</label>
                     <input type="number" required class="form-control" name="age">
                   </div>
-                  <div class="col-3">
-                    <label for="program">Body Vital Statistic:</label>
-                    <input type="text" required class="form-control" name="vital_stat">
-                  </div>
+                 
                   <div class="col-3">
                     <label for="program">Height:</label>
                     <input type="text" required class="form-control" name="height">
@@ -46,7 +43,7 @@
                   </div>
                   <div class="col-6">
                     <label for="program">Contestant Number:</label>
-                    <input type="number"  class="form-control" name="number">
+                    <input type="number"  required class="form-control" name="number">
                   </div>
                 </div>
                 <div class="row">

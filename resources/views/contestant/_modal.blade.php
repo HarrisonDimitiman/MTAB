@@ -15,33 +15,30 @@
                   </div>
                   <div class="col-10">
                     <label for="program">Name:</label>
-                    <input type="text" required class="form-control" value="{{$contestant->name}}" placeholder="{{$contestant->name}}" name="name">
+                    <input type="text"  class="form-control" value="{{$contestant->name}}" placeholder="{{$contestant->name}}" name="name">
                     <label for="program">Location:</label>
-                    <input type="text" required class="form-control" value="{{$contestant->location}}" placeholder="{{$contestant->location}}" name="location">
+                    <input type="text"  class="form-control" value="{{$contestant->location}}" placeholder="{{$contestant->location}}" name="location">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-3">
                     <label for="program">Age:</label>
-                    <input type="number" required class="form-control" value="{{$contestant->age}}" placeholder="{{$contestant->age}}" name="age">
+                    <input type="number"  class="form-control" value="{{$contestant->age}}" placeholder="{{$contestant->age}}" name="age">
                   </div>
-                  <div class="col-3">
-                    <label for="program">Body Vital Statistic:</label>
-                    <input type="text" required class="form-control" value="{{$contestant->vital_stat}}" placeholder="{{$contestant->vital_stat}}" name="vital_stat">
-                  </div>
+                 
                   <div class="col-3">
                     <label for="program">Height:</label>
-                    <input type="text" required class="form-control" value="{{$contestant->height}}" placeholder="{{$contestant->height}}" name="height">
+                    <input type="text"  class="form-control" value="{{$contestant->height}}" placeholder="{{$contestant->height}}" name="height">
                   </div>
                   <div class="col-3">
                     <label for="program">Weight:</label>
-                    <input type="text" required class="form-control" value="{{$contestant->weight}}" placeholder="{{$contestant->weight}}" name="weight">
+                    <input type="text"  class="form-control" value="{{$contestant->weight}}" placeholder="{{$contestant->weight}}" name="weight">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-6">
                     <label for="program">Educational Attainment:</label>
-                    <input type="text" required class="form-control" placeholder="{{$contestant->educational}}" value="{{$contestant->educational}}" name="educational">
+                    <input type="text"  class="form-control" placeholder="{{$contestant->educational}}" value="{{$contestant->educational}}" name="educational">
                   </div>
                   <div class="col-6">
                     <label for="program">Contestant Number:</label>
@@ -51,7 +48,7 @@
                 <div class="row">
                   <div class="col-6">
                     <label for="program">Birthdate:</label>
-                    <input type="date" required class="form-control" value="{{$contestant->birthdate}}" placeholder="{{$contestant->birthdate}}" name="birthdate">
+                    <input type="date"  class="form-control" value="{{$contestant->birthdate}}" placeholder="{{$contestant->birthdate}}" name="birthdate">
                   </div>
                   <div class="col-6">
                     <label for="program">Image:</label>

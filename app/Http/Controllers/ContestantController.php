@@ -42,7 +42,6 @@ class ContestantController extends Controller
             'name' => 'required',
             'age' => 'required',
             'location' => 'required',
-            'vital_stat' => 'required',
             'weight' => 'required',
             'height' => 'required',
             'birthdate' => 'required',
@@ -53,7 +52,6 @@ class ContestantController extends Controller
         $contestant->name=$request->name;
         $contestant->age=$request->age;
         $contestant->location=$request->location;
-        $contestant->vital_stat=$request->vital_stat;
         $contestant->weight=$request->weight;
         $contestant->height=$request->height;
         $contestant->birthdate=$request->birthdate;
@@ -108,7 +106,6 @@ class ContestantController extends Controller
             'name' => '',
             'age' => '',
             'location' => '',
-            'vital_stat' => '',
             'weight' => '',
             'height' => '',
             'birthdate' => '',
