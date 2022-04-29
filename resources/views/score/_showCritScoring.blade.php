@@ -55,7 +55,7 @@
 
 
 <script>
-        $(".helloBiboy").click(function(e){
+        // $(".helloBiboy").click(function(e){
                 // var pleaseCheck = $('#formCheck').valid();
                 // console.log(pleaseCheck);
                 // if(pleaseCheck == true)
@@ -79,17 +79,17 @@
                 // }
 
              
-                var values = $("input[id='scoring']").map(function(){return $(this).val();}).get();
-                if(values == null){
-                    e.preventDefault();
-                    console.log("DILI SAKTO");
-                } else {
-                    e.preventDefault();
-                    console.log("SAKTO NI");
-                }
+                // var values = $("input[id='scoring']").map(function(){return $(this).val();}).get();
+                // if(values == null){
+                //     e.preventDefault();
+                //     console.log("DILI SAKTO");
+                // } else {
+                //     e.preventDefault();
+                //     console.log("SAKTO NI");
+                // }
 
 
                 
                 
-            });
+            // });
 </script>

@@ -11,8 +11,10 @@
                         <h4>
                             <i class="fa fa-align-justify"></i>
                              {{ __('Selection of Top 6 Management') }}
-                        </h4>      	
+                        </h4>      
+                        @role('admin')	
                         <a href="{{ URL::to('/generateTop6') }}" class="ml-auto"><button class="btn btn-primary ml-auto" style="float:right;">Generate Top 6</button></a>	
+                        @endrole
                         </div>
                         <div class="card-body">
                             <div class="row">
