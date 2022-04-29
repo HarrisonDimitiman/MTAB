@@ -37,10 +37,18 @@
       Contestant
     </a>
   </li>
+  
   <li class="c-sidebar-nav-item">
     <a class="c-sidebar-nav-link" href="{{ route('score.index') }}">
       <i class="cil-list-numbered c-sidebar-nav-icon"></i>
       Score
+    </a>
+  </li>
+
+  <li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link" href="{{ URL::to('/indexSemi') }}">
+      <i class="cil-user-female c-sidebar-nav-icon"></i>
+      Semi Criteria
     </a>
   </li>
 
@@ -52,14 +60,21 @@
   </li>
 
   <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="{{ route('semi.index') }}">
+    <a class="c-sidebar-nav-link" href="{{ URL::to('/finalCriteria') }}">
+      <i class="cil-indent-increase c-sidebar-nav-icon"></i>
+      Final Criteria
+    </a>
+  </li>
+
+  <li class="c-sidebar-nav-item">
+    <a class="c-sidebar-nav-link" href="{{ URL::to('/indexTerm') }}">
       <i class="cil-indent-increase c-sidebar-nav-icon"></i>
       Selection of Top 3 (Q And A)
     </a>
   </li>
 
   <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="{{ route('terminal.index') }}">
+    <a class="c-sidebar-nav-link" href="{{ URL::to('/finalRound') }}">
       <i class="cil-bullhorn c-sidebar-nav-icon"></i>
       Final Round
     </a>
@@ -83,6 +98,24 @@
       <a class="c-sidebar-nav-link" href="{{ route('score.index') }}">
         <i class="cil-speedometer c-sidebar-nav-icon"></i>
         Score
+      </a>
+    </li>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ route('semi.index') }}">
+        <i class="cil-list-rich c-sidebar-nav-icon"></i>
+        Selection of Top 6
+      </a>
+    </li>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ URL::to('/indexTerm') }}">
+        <i class="cil-indent-increase c-sidebar-nav-icon"></i>
+        Selection of Top 3 (Q And A)
+      </a>
+    </li>
+    <li class="c-sidebar-nav-item">
+      <a class="c-sidebar-nav-link" href="{{ URL::to('/finalRound') }}">
+        <i class="cil-bullhorn c-sidebar-nav-icon"></i>
+        Final Round
       </a>
     </li>
   @endrole

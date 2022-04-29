@@ -126,8 +126,6 @@ class ScoreController extends Controller
            
         }
 
-
-
         return redirect()->back()->with('success','Successfull');
     }
 

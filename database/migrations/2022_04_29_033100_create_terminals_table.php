@@ -15,6 +15,8 @@ class CreateTerminalsTable extends Migration
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->double('term_percentage');
             $table->timestamps();
         });
     }
