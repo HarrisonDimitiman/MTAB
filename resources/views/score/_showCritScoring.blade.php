@@ -3,7 +3,7 @@
         margin-left: 2%; width: 100px !important;
     }
 </style>
-<form action="{{ URL::to('/saveScore/'.Auth::user()->id.'/'.$event_id.'/'.$contestant->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ URL::to('/saveScore/'.Auth::user()->id.'/'.$event_id.'/'.$contestant->id) }}" method="POST" enctype="multipart/form-data" id="form">
     <div class="" id="critShowScoring">
         <label class=""for="score">Sub Criteria</label>
         <label class=""for="score" style="margin-left:72%;">Score</label>
@@ -46,13 +46,20 @@
         
     </div>
     @if($value == 0)
-        <button class="btn btn-primary btn-sm float-right mt-2" type="submit">Submit</button>
+        <button class="btn btn-primary btn-sm float-right mt-2" type="submit" id="button">Submit</button>
     @elseif ($value == 1)
         <button class="btn btn-primary btn-sm float-right mt-2" disabled>Done Scoring</button>
     @endif
     
 </form>
 {{-- <script>
+     $("#button").click(function (e) { 
+        $("#form").submit();
+	$("#button").attr("disabled", true);
+    
+	 
+});
+ 
     $('.btn-submit').click(function(e){
 			swal ({
 			    title: "Are you sure?",

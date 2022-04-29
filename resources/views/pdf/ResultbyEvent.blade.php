@@ -33,7 +33,7 @@
 <p style="position:absolute;left:245px;top:95px;font-size:10px;">e-mail Address : region10.lanaodelnorte@tesda.gov.ph</p>
 
 
-<div style="position:absolute;left:20px;top:200px;">
+<div style="position:absolute;left:20px;top:150px;">
     <table style="width:100%;border-collapse: collapse;">
     
         <tr>
