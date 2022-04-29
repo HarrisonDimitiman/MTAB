@@ -123,4 +123,9 @@ class EventController extends Controller
         }
         return Redirect::to('/event/'.$programs_id)->with('message','Event restored succesfully');        
     }
+    public function ResultbyEvent()
+    {
+        $pdf=PDF::loadView('pdf.ResultbyEvent');
+        return $pdf->stream('ResultbyEvent.pdf'); 
+    }
 }

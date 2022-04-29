@@ -34,7 +34,11 @@ Route::group(['middleware' => ['auth']],function() {
             Route::resource('event','EventController');  
             Route::resource('judges','JudgesController');
             Route::resource('score','ScoreController');  
-            Route::resource('contestant','ContestantController');         
+            Route::resource('contestant','ContestantController');
+            Route::resource('semi','SemiController');  
+            Route::resource('terminal','TerminalController');
+
+            Route::get('/ResultbyEvent',[App\Http\Controllers\EventController::class, 'ResultbyEvent'])->name('ResultbyEvent');      
         });
     }); 
     Route::get('/colors', function () {     return view('dashboard.colors'); });

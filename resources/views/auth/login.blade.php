@@ -5,11 +5,16 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-5">
+          
           <div class="card-group">
+            
             <div class="card p-4">
+            <div class="card-header" style="background-image: url('{{ asset('assets/img/bb.jpg')}}');background-repeat: no-repeat;height: 10rem; background-size: 400px 175px;">
+                
+                </div>
               <div class="card-body">
-                <h1 class="text-center">Login</h1>
-                <p class="text-muted text-center">Sign In to your account</p>
+                <h5 class="text-center">Login / Sign In to your account</h5>
+                <p class="text-muted text-center"></p>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="input-group mb-3">
@@ -38,7 +43,7 @@
                     </div>
                     </form>
                     <div class="col-6 text-right">
-                        <a href="{{ route('password.request') }}" class="btn btn-link px-0">{{ __('Forgot Your Password?') }}</a>
+                        <a href="https://rtciligan.com" class="btn btn-link px-0">{{ __('© TESDA RTC-Iligan') }}</a>
                     </div>
                     </div>
               </div>

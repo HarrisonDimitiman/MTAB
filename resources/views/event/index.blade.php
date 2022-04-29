@@ -63,7 +63,10 @@
                                         <td>{{ $event->id ?? '' }}</td>
                                         <td>{{ $event->event_name ?? '' }}</td>
 										<td><span class="badge badge-danger">Pending</span></td>
-										<td><button class="btn btn-info"> <i class="cil-print"></i> Print</button></td>
+										<td><a  class="btn btn-info" target="_blank" href="{{ URL::to('/ResultbyEvent/') }}">
+												<i class="cil-print"></i>
+												&nbsp;Print
+											</a></td>
                                         <td style="width: 9%;">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
