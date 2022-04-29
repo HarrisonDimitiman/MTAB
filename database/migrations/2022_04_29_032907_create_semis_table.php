@@ -15,6 +15,8 @@ class CreateSemisTable extends Migration
     {
         Schema::create('semis', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->double('semi_percentage');
             $table->timestamps();
         });
     }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Semi, Score, Contestant, Event, User};
+use App\Models\{Semi, Score, Contestant, Event, User, SemiScore};
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class SemiController extends Controller
 {
@@ -15,8 +16,13 @@ class SemiController extends Controller
      */
     public function index()
     {
-        
-        return view('semi.index');
+        $getContestantOverAllTotalJudge = Score::join('contestants','contestants.id','scores.contestant_id')
+                                                ->orderBy('overAllTotalJudge', 'DESC')
+                                                ->where('overAllTotalJudge', '!=', null)
+                                                ->get()
+                                                ->keyBy('overAllTotalJudge')->take(6);
+        // return $getContestantOverAllTotalJudge;
+        return view('semi.index', compact('getContestantOverAllTotalJudge'));
     }
 
     public function generateTop6()
@@ -68,6 +74,8 @@ class SemiController extends Controller
             }
         }
 
+
+
         if($tempChecker != 0)
         {
             return "WALA PA KA SCORE TANAN JUDGE SA CONSTESTANT";
@@ -76,6 +84,7 @@ class SemiController extends Controller
         {
             for($i = 1; $i <= $getContestantToArray2ndLength; $i++)
             {
+                $overAllTotalContestantPerJudge = 0;
                 for($j = 1; $j <= $getUserJudge2ndLength; $j++)
                 {
                     $checkContestanIfJudge = DB::table('scores')
@@ -84,12 +93,31 @@ class SemiController extends Controller
                         ->where('overAllTotal', '!=', 0)
                         ->get()->keyBy('user_id');
 
-                    // TO BE CONTINUE
-                    return $checkContestanIfJudge->overAllTotal;
-
+                    $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge + $checkContestanIfJudge[$j+1]->overAllTotal;
+                    $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge / $getUserJudge2ndLength;
+                    $overAllTotalContestantPerJudge = round($overAllTotalContestantPerJudge, 2);
+                    if($j == $getUserJudge2ndLength)
+                    {
+                        $data2 = array();
+                        $data2['overAllTotalJudge'] = $overAllTotalContestantPerJudge;
+                        Score::query()
+                            ->where('contestant_id', $getContestantToArray2nd[$i]['id'])
+                            ->update($data2);   
+                    }
+                    // echo "<pre>";
+                    //     print_r($overAllTotalContestantPerJudge);
+                    // echo "</pre>";
                 }
             }
         }
+
+        $getContestantOverAllTotalJudge = Score::join('contestants','contestants.id','scores.contestant_id')
+                                                ->orderBy('overAllTotalJudge', 'DESC')
+                                                ->where('overAllTotalJudge', '!=', null)
+                                                ->get()
+                                                ->keyBy('overAllTotalJudge')->take(6);
+        // return $getContestantOverAllTotalJudge;
+        return view('semi.index', compact('getContestantOverAllTotalJudge'));
     }
 
     /**
@@ -108,10 +136,87 @@ class SemiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function indexSemi()
     {
-        //
+        $semi = Semi::get(); 
+        return view('semi.indexSemi',compact('semi'));
     }
+    public function storeSemi(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'semi_percentage' => 'required',
+        ]);
+
+        Semi::create($validated);
+        return redirect()->back()->with('success','Successfully Created Semi Criteria!');
+    }
+    public function editSemi(Semi $semi, $semi_id)
+    {
+        $firstSemi = Semi::where('id', $semi_id)->first();
+        return view('semi._modalSemi',compact('firstSemi'));
+    }
+    public function updateSemi(Request $request, Semi $semi, $semi_id)
+    {
+        $data = array();
+        $data['name'] = $request->name;
+        $data['semi_percentage'] = $request->semi_percentage;
+
+        DB::table('semis')->where('id', $semi_id)->update($data);
+        return redirect()->back()->with('success','Successfully Updated Semi Criteria!');
+    }
+    public function destroySemi(Semi $semi, $semi_id)
+    {
+        DB::table('semis')->where('id', $semi_id)->delete();
+        return redirect()->back()->with('error','Semi Criteria succesfully deleted!!');  
+    }
+
+    public function showContestant($contestant_id)
+    {
+        $firstContestant = Contestant::where('id', $contestant_id)->first();
+        $getSemiCrits = Semi::get();
+        return view('semi._showSemiScoring', compact('firstContestant', 'getSemiCrits'));
+    }
+    
+    public function addScoreContestantSemi($contestant_id, Request $request)
+    {
+        $semi_crt_id = $request->input('semi_crits_id');
+        array_unshift($semi_crt_id,"");
+        unset($semi_crt_id[0]);
+        $semi_crt_Length = count($semi_crt_id);
+
+        $score = $request->input('score');
+        array_unshift($score,"");
+        unset($score[0]);
+        $scoreLength = count($score);
+        $scoreSum = array_sum($score);
+
+        $ifAlreadyScore = SemiScore::where('contestant_id', $contestant_id)
+            ->where('user_id', Auth::user()->id)
+            ->count();
+
+        // $getEventPercentage = Event::where('id', $event_id)->first();
+        // $totalEvent = $scoreSum * $getEventPercentage->percentage; 
+        
+        for($i = 1; $i <= $semi_crt_Length; $i++)
+        {
+            $data = array();
+            $data['user_id'] = Auth::user()->id;
+            $data['semi_id'] = $semi_crt_id[$i];
+            $data['contestant_id'] = $contestant_id;
+            $data['total'] = $scoreSum;
+            $data['overAllTotal'] = 0;
+            $data['score'] = $score[$i];
+
+            DB::table('semi_scores')
+                ->insert($data);
+        }
+
+        return redirect()->back()->with('success','Successfull');
+    }
+    
+
+    
 
     /**
      * Display the specified resource.

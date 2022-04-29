@@ -10,16 +10,16 @@
                         <div class="card-header d-flex">
                         <h4>
                             <i class="fa fa-align-justify"></i>
-                             {{ __('Selection of Top 6 Management') }}
+                             {{ __('Selection of Top 3 Management') }}
                         </h4>      	
-                        <a href="{{ URL::to('/generateTop6') }}" class="ml-auto"><button class="btn btn-primary ml-auto" style="float:right;">Generate Top 6</button></a>	
+                        <a href="{{ URL::to('/generateTop3') }}" class="ml-auto"><button class="btn btn-primary ml-auto" style="float:right;">Generate Top 3</button></a>	
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-3">
                                     <div class="row" >
                                         @foreach ($getContestantOverAllTotalJudge as $getContestantOverAllTotalJudge)
-                                            <div class="input-group mb-1 contestant" data-url="{{ URL::to('/showContestant',$getContestantOverAllTotalJudge->contestant_id) }}">
+                                            <div class="input-group mb-1 contestant" data-url="{{ URL::to('/showFinalContestant',$getContestantOverAllTotalJudge->contestant_id) }}">
                                                 <div class="input-group-text">
                                                     {{ $getContestantOverAllTotalJudge->overAllTotalJudge }}%
                                                 </div>
@@ -29,7 +29,7 @@
                                     </div>
                                 </div>
                                 <div class="col-9">
-                                    <div class="append-semi-score"></div>
+                                    <div class="append-final-score"></div>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                 </div>
             </div>
     
-    <div class="append-semi"></div>
+    <div class="append-final"></div>
 
 @endsection
 @section('javascript')
@@ -54,7 +54,7 @@
         // });
 
         $(".contestant").click(function(){
-            var div = $('.append-semi-score');
+            var div = $('.append-final-score');
 			div.empty();
             
             // console.log(div);
@@ -63,7 +63,7 @@
 			    url: url,
 			    success:function(data){
 			        div.append(data);
-			        $('#semi-card').show();
+			        $('#final-card').show();
 			    }
 			});
         });

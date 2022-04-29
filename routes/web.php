@@ -12,6 +12,24 @@ Route::group(['middleware' => ['auth']],function() {
 
         Route::group(['middleware' => ['role:admin|judge']],function() { 
 
+            Route::get('/generateFinal', 'TerminalController@generateFinal');
+            Route::get('/finalRound', 'TerminalController@finalRound');
+            Route::post('/addScoreContestantFinal/{final_id}', 'TerminalController@addScoreContestantFinal');
+            Route::get('/showFinalContestant/{contestant_id}', 'TerminalController@showFinalContestant');
+            Route::post('/updateTerm/{final_id}', 'TerminalController@updateTerm');
+            Route::get('/editFinal/{final_id}', 'TerminalController@editFinal');
+            Route::post('/storeFinal', 'TerminalController@storeFinal');
+            Route::delete('/destroyFinalCrits/{final_id}', 'TerminalController@destroyFinalCrits');
+            Route::get('/finalCriteria', 'TerminalController@finalCriteria');
+            Route::get('/generateTop3', 'TerminalController@generateTop3');
+            Route::get('/indexTerm', 'TerminalController@indexTerm');
+            Route::post('/addScoreContestantSemi/{contestant_id}', 'SemiController@addScoreContestantSemi');
+            Route::get('/showContestant/{contestant_id}', 'SemiController@showContestant');
+            Route::post('/updateSemi/{semi_id}', 'SemiController@updateSemi');
+            Route::delete('/destroySemi/{semi_id}', 'SemiController@destroySemi');
+            Route::get('/editSemi/{semi_id}', 'SemiController@editSemi');
+            Route::post('/storeSemi', 'SemiController@storeSemi');
+            Route::get('/indexSemi', 'SemiController@indexSemi');
             Route::get('/generateTop6', 'SemiController@generateTop6');
             Route::post('/saveScore/{jUser_id}/{event_id}/{contestant_id}', 'ScoreController@saveScore');
             Route::get('/getCritsEvent/{event_id}/{contestant_id}', 'ScoreController@getCritsEvent');
@@ -30,6 +48,9 @@ Route::group(['middleware' => ['auth']],function() {
             Route::get('/event/{prgrm_id}/', 'EventController@index');
             Route::get('program/{id}/', 'ProgramController@restore')->name('program.restore');
 
+
+
+
             Route::resource('users','UsersController');     
             Route::resource('program','ProgramController');   
             Route::resource('event','EventController');  
@@ -38,6 +59,8 @@ Route::group(['middleware' => ['auth']],function() {
             Route::resource('contestant','ContestantController');
             Route::resource('semi','SemiController');  
             Route::resource('terminal','TerminalController');
+
+
 
             Route::get('/ResultbyEvent',[App\Http\Controllers\EventController::class, 'ResultbyEvent'])->name('ResultbyEvent');      
         });
