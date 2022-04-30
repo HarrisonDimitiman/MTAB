@@ -35,7 +35,8 @@
 
 <div style="position:absolute;left:20px;top:150px;">
     <table style="width:100%;border-collapse: collapse;">
-    
+        
+        
         <tr>
             <th style="text-align:left;border: 1px solid black;border: 1px solid black;text-align:center;">CANDIDATE'S NAME</th>
             <th style="text-align:left;border: 1px solid black;text-align:center;">LOCATION</th>

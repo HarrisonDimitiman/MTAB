@@ -5,7 +5,8 @@
     }
 </style>
 <div class="card text-dark bg-white mb-3" id="contestant-card" >
-    <div class="card-header">Contestant # {{ $firstContestant->number }}
+    <div class="card-header">
+    <a style="font-size:25px;font-weight:bold;">Contestant #{{ $firstContestant->number }} ({{ $getContestantOverAllTotalJudge->overAllTotalJudge }}%)</a>
         <button class="btn btn-sm btn-info close-card float-right">Close</button>
     </div>
     <div class="card-body">
@@ -45,33 +46,61 @@
             </select> --}}
             <form action="{{ URL::to('/addScoreContestantSemi/'.$firstContestant->id) }}" method="POST" enctype="multipart/form-data" id="form">
                 @csrf
-                <label for="criteria">Final Criteria:</label>
+                <label for="criteria">Final Criteriaxxxx:</label>
                 <label class=""for="score" style="margin-left:72%;">Score</label>
-                
-                @foreach ($getSemiCrits as $i => $getSemiCrits)
-                    <!-- <label for="criteria">{{ $getSemiCrits->name }} ({{ $getSemiCrits->semi_percentage }}%)</label>
-                    <input type="hidden" value="{{ $getSemiCrits->id }}" required name="semi_crits_id[]"><br><br>
-                    <input type="number" value="" required name="score[]"><br><br> -->
-                   
-                    <div class="row">
-                        <div class="div col-9">
-                            <div class="input-group mb-1" style="width:500px;">
-                                    <div class="input-group-text">{{++$i}}</div>
-                                    <input type="text" class="form-control font-weight-bold" placeholder="{{ $getSemiCrits->name }} ({{ $getSemiCrits->semi_percentage }}%)" disabled>
-                                    <input type="hidden" name="crit_id[]" value="{{ $getSemiCrits->id }}" required name="semi_crits_id[]">
-                                    
+                @if ($value == 0)
+                    @foreach ($getSemiCrits as $i => $getSemiCrits)
+                        <!-- <label for="criteria">{{ $getSemiCrits->name }} ({{ $getSemiCrits->semi_percentage }}%)</label>
+                        <input type="hidden" value="{{ $getSemiCrits->id }}" required name="semi_crits_id[]"><br><br>
+                        <input type="number" value="" required name="score[]"><br><br> -->
+                        
+                        <div class="row">
+                            <div class="div col-9">
+                                <div class="input-group mb-1" style="width:500px;">
+                                        <div class="input-group-text">{{++$i}}</div>
+                                        <input type="text" class="form-control font-weight-bold" placeholder="{{ $getSemiCrits->name }} ({{ $getSemiCrits->semi_percentage }}%)" disabled>
+                                        <input type="hidden"  value="{{ $getSemiCrits->id }}" required name="semi_crits_id[]">
+                                        
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-3">
                             <div class="col-3">
-                                <input type="number" class="form-control font-weight-bold text-center wd" name="score[]" value="" required>
+                                <div class="col-3">
+                                    <input type="number" class="form-control font-weight-bold text-center wd" name="score[]" value="" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                           
-                @endforeach
+                            
+                    @endforeach
+                @elseif ($value == 1)
+                    @foreach ($getSemiCrits2nd as $i => $getSemiCrits2nd)
+                        
+                        
+                        <div class="row">
+                            <div class="div col-9">
+                                <div class="input-group mb-1" style="width:500px;">
+                                        <div class="input-group-text">{{++$i}}</div>
+                                        <input type="text" class="form-control font-weight-bold" placeholder="{{ $getSemiCrits2nd->name }} ({{ $getSemiCrits2nd->semi_percentage }}%)" disabled>
+                                        <!-- <input type="hidden"  value="{{ $getSemiCrits2nd->id }}" required name="semi_crits_id[]"> -->
+                                        
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="col-3">
+                                    <input type="number" class="form-control font-weight-bold text-center wd" value="{{ $getSemiCrits2nd->score }}" disabled name="score[]" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                            
+                    @endforeach
+                @endif
+                
                
+
+                @if ($value == 0)
                     <button class="btn btn-primary btn-sm float-right mt-2 btn-submit" type="submit">Submit</button>
+                @elseif ($value == 1)
+                    <button class="btn btn-primary btn-sm float-right mt-2" disabled>Done Scoring</button>
+                @endif
                
             </form>
            

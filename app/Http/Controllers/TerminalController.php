@@ -94,10 +94,14 @@ class TerminalController extends Controller
                         ->get()->keyBy('user_id');   
 
                     $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge + $checkContestanIfJudge[$j+1]->total;
-                    $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge / $getUserJudge2ndLength;
-                    $overAllTotalContestantPerJudge = round($overAllTotalContestantPerJudge, 2);
                     if($j == $getUserJudge2ndLength)
                     {
+
+                        $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge / $getUserJudge2ndLength;
+                        $overAllTotalContestantPerJudge = round($overAllTotalContestantPerJudge, 2);
+                        // echo "<pre>";
+                        //     print_r($getContestantToArray2nd[$i]['id']);
+                        // echo "</pre>";
                         $data2 = array();
                         $data2['overAllTotalJudge'] = $overAllTotalContestantPerJudge;
                         SemiScore::query()
@@ -108,11 +112,11 @@ class TerminalController extends Controller
             }
         }
 
-        $getContestantOverAllTotalJudge  = SemiScore::join('contestants','contestants.id','semi_scores.contestant_id')
-                                                ->orderBy('overAllTotalJudge', 'DESC')
-                                                ->get()
-                                                ->keyBy('contestant_id')->take(3);
-        return view('terminal.index', compact('getContestantOverAllTotalJudge'));
+        // $getContestantOverAllTotalJudge  = SemiScore::join('contestants','contestants.id','semi_scores.contestant_id')
+        //                                         ->orderBy('overAllTotalJudge', 'DESC')
+        //                                         ->get()
+        //                                         ->keyBy('contestant_id')->take(3);
+        return redirect()->back()->with('success','Successfully Generate Top 3!');
     }
 
     public function finalCriteria()
@@ -153,7 +157,32 @@ class TerminalController extends Controller
     {
         $firstContestant = Contestant::where('id', $contestant_id)->first();
         $getFinalCrits = Terminal::get();
-        return view('terminal._showFinalScoring', compact('firstContestant', 'getFinalCrits'));
+
+        $ifAlreadyScore = TerminalScore::where('contestant_id', $contestant_id)
+                            ->where('user_id', Auth::user()->id)
+                            ->count();
+        $getFinalCrits2nd = TerminalScore::join('terminals', 'terminals.id', 'terminal_scores.term_id')
+                            ->where('contestant_id', $contestant_id) 
+                            ->where('user_id', Auth::user()->id)   
+                            ->select('terminal_scores.score', 'terminal_scores.term_id', 'terminals.name', 'terminals.term_percentage', 'terminal_scores.overAllTotalJudge')
+                            ->get();
+
+        $getContestantOverAllTotalJudge = SemiScore::join('contestants','contestants.id','semi_scores.contestant_id')
+                            ->where('semi_scores.contestant_id', $contestant_id)
+                            ->where('overAllTotalJudge', '!=', null)
+                            ->first();
+        $value;
+        if($ifAlreadyScore <= 0)
+        {
+            $value = 0;
+        }
+        elseif($ifAlreadyScore >= 1)
+        {
+            $value = 1;
+        }
+
+        // return $getContestantOverAllTotalJudge->overAllTotalJudge;
+        return view('terminal._showFinalScoring', compact('firstContestant', 'getFinalCrits', 'ifAlreadyScore', 'getFinalCrits2nd', 'getContestantOverAllTotalJudge', 'value'));
     }
 
     public function destroyFinalCrits($final_id)
@@ -205,7 +234,7 @@ class TerminalController extends Controller
                                                 ->orderBy('overAllTotalJudge', 'DESC')
                                                 ->where('overAllTotalJudge', '!=', null)
                                                 ->get()
-                                                ->keyBy('overAllTotalJudge')->take(3);
+                                                ->keyBy('contestant_id')->take(3);
                                                 
         // return $getContestantOverAllTotalJudge;
         return view('final.index2nd', compact('getContestantOverAllTotalJudge'));
@@ -279,10 +308,15 @@ class TerminalController extends Controller
                         ->get()->keyBy('user_id');   
 
                     $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge + $checkContestanIfJudge[$j+1]->total;
-                    $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge / $getUserJudge2ndLength;
-                    $overAllTotalContestantPerJudge = round($overAllTotalContestantPerJudge, 2);
+                    
                     if($j == $getUserJudge2ndLength)
                     {
+                       
+                        $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge / $getUserJudge2ndLength;
+                        $overAllTotalContestantPerJudge = round($overAllTotalContestantPerJudge, 2);
+                        // echo "<pre>";
+                        //     print_r($overAllTotalContestantPerJudge);
+                        // echo "</pre>";
                         $data2 = array();
                         $data2['overAllTotalJudge'] = $overAllTotalContestantPerJudge;
                         TerminalScore::query()
@@ -293,11 +327,11 @@ class TerminalController extends Controller
             }
         }
 
-        $getContestantOverAllTotalJudge = TerminalScore::join('contestants','contestants.id','terminal_scores.contestant_id')
-                                                ->orderBy('overAllTotalJudge', 'DESC')
-                                                ->get()
-                                                ->keyBy('contestant_id')->take(3);
-        return view('final.index2nd', compact($getContestantOverAllTotalJudge));
+        // $getContestantOverAllTotalJudge = TerminalScore::join('contestants','contestants.id','terminal_scores.contestant_id')
+        //                                         ->orderBy('overAllTotalJudge', 'DESC')
+        //                                         ->get()
+        //                                         ->keyBy('contestant_id')->take(3);
+        return redirect()->back()->with('success','Successfully Generate the FINALE!');
     }
 
     /**

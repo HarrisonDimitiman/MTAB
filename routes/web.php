@@ -62,7 +62,11 @@ Route::group(['middleware' => ['auth']],function() {
 
 
 
-            Route::get('/ResultbyEvent',[App\Http\Controllers\EventController::class, 'ResultbyEvent'])->name('ResultbyEvent');      
+            Route::get('/ResultbyEvent/{event_id}',[App\Http\Controllers\EventController::class, 'ResultbyEvent'])->name('ResultbyEvent');
+            Route::get('/ResultbyEventTop6',[App\Http\Controllers\EventController::class, 'ResultbyEventTop6'])->name('ResultbyEventTop6'); 
+            Route::get('/ResultbyEventTop3',[App\Http\Controllers\EventController::class, 'ResultbyEventTop3'])->name('ResultbyEventTop3');   
+            Route::get('/ResultbyEventFinal',[App\Http\Controllers\EventController::class, 'ResultbyEventFinal'])->name('ResultbyEventFinal');   
+            
         });
     }); 
     Route::get('/colors', function () {     return view('dashboard.colors'); });

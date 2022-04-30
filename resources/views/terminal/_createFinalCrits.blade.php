@@ -10,10 +10,10 @@
                 </button>
               </div>
               <div class="modal-body">
-                <label for="program">Semi Criteria Name:</label>
+                <label for="program">Final Criteria Name:</label>
                 <input type="text" required class="form-control" name="name">
-                <label for="program">Semi Criteria Percentage:</label>
-                <input type="number" required class="form-control" name="term_percentage">
+                <label for="program">Final Criteria Percentage:</label>
+                <input type="number" step="0.01" required class="form-control" name="term_percentage">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

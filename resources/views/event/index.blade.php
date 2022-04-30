@@ -65,7 +65,7 @@
                                         <td>{{ $event->event_name ?? '' }}</td>
 										<td>{{ $event->percentage ?? '' }}</td>
 										<td><span class="badge badge-danger">Pending</span></td>
-										<td><a  class="btn btn-info" target="_blank" href="{{ URL::to('/ResultbyEvent/') }}">
+										<td><a  class="btn btn-info" target="_blank" href="{{ URL::to('/ResultbyEvent/'.$event->id) }}">
 												<i class="cil-print"></i>
 												&nbsp;Print
 											</a></td>

@@ -1,5 +1,11 @@
+<style>
+    .wd{
+        margin-left: 2%; width: 100px !important;
+    }
+</style>
 <div class="card text-dark bg-white mb-3" id="final-card" >
-    <div class="card-header">Contestant # {{ $firstContestant->number }}
+    <div class="card-header">
+    <a style="font-size:25px;font-weight:bold;">Contestant #{{ $firstContestant->number }} ({{ $getContestantOverAllTotalJudge->overAllTotalJudge }})</a>
         <button class="btn btn-sm btn-info close-card float-right">Close</button>
     </div>
     <div class="card-body">
@@ -37,14 +43,55 @@
                 @endforeach
                 
             </select> --}}
-            <form action="{{ URL::to('/addScoreContestantFinal/'.$firstContestant->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ URL::to('/addScoreContestantFinal/'.$firstContestant->id) }}" method="POST" enctype="multipart/form-data" id="form">
                 @csrf
-                @foreach ($getFinalCrits as $getFinalCrits)
-                    <label for="criteria">{{ $getFinalCrits->name }} ({{ $getFinalCrits->term_percentage }}%)</label>
-                    <input type="hidden" value="{{ $getFinalCrits->id }}" required name="final_crits_id[]"><br><br>
-                    <input type="number" value="" required name="score[]"><br><br>
-                @endforeach
-                <button class="btn btn-primary btn-sm float-right mt-2 btn-submit" type="submit">Submit</button>
+                  <label for="criteria">Final Criteria:</label>
+                <label class=""for="score" style="margin-left:72%;">Score</label>
+               
+                @if($value == 0)
+                    @foreach ($getFinalCrits as $i => $getFinalCrits)
+                        <div class="row">
+                            <div class="div col-9">
+                                <div class="input-group mb-1" style="width:500px;">
+                                        <div class="input-group-text">{{++$i}}</div>
+                                        <input type="text" class="form-control font-weight-bold" placeholder="{{ $getFinalCrits->name }} ({{ $getFinalCrits->term_percentage }}%)" disabled>
+                                        <input type="hidden"  value="{{ $getFinalCrits->id }}" required name="final_crits_id[]">
+                                        
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="col-3">
+                                    <input type="number" class="form-control font-weight-bold text-center wd" name="score[]" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @elseif($value == 1)
+                    @foreach ($getFinalCrits2nd as $i => $getFinalCrits2nd)
+                        <div class="row">
+                            <div class="div col-9">
+                                <div class="input-group mb-1" style="width:500px;">
+                                        <div class="input-group-text">{{++$i}}</div>
+                                        <input type="text" class="form-control font-weight-bold" placeholder="{{ $getFinalCrits2nd->name }} ({{ $getFinalCrits2nd->term_percentage }}%)" disabled>
+                                        
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="col-3">
+                                    <input type="number" class="form-control font-weight-bold text-center wd" disabled name="score[]" value="{{ $getFinalCrits2nd->score }}" required>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+                
+                @if($value == 0)
+                    <button class="btn btn-primary btn-sm float-right mt-2 btn-submit" type="submit">Submit</button>
+                @elseif($value == 1)
+                    <button class="btn btn-primary btn-sm float-right mt-2" disabled type="submit">Done Scoring</button>
+                @endif
+                
+                
             </form>
            
             
@@ -68,7 +115,16 @@
 			});
         });
         $(".close-card").click(function(){
-            $("#contestant-card").hide();
+            $("#final-card").hide();
         });
+
+        $(document).ready(function() {
+        $("form").submit(function() {
+            $(this).submit(function() {
+                return false;
+            });
+            return true;
+        });     
+    }); 
         
 </script>

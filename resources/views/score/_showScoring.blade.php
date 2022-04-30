@@ -1,5 +1,5 @@
 <div class="card text-dark bg-white mb-3" id="contestant-card" >
-    <div class="card-header">Contestant # {{ $contestant->number }}
+    <div class="card-header"> <a style="font-size:25px;font-weight:bold;">Contestant # {{ $contestant->number }}</a>
         <button class="btn btn-sm btn-info close-card float-right">Close</button>
     </div>
     <div class="card-body">

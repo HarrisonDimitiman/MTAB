@@ -20,7 +20,7 @@ class SemiController extends Controller
                                                 ->orderBy('overAllTotalJudge', 'DESC')
                                                 ->where('overAllTotalJudge', '!=', null)
                                                 ->get()
-                                                ->keyBy('overAllTotalJudge')->take(6);
+                                                ->keyBy('contestant_id')->take(6);
         // return $getContestantOverAllTotalJudge;
         return view('semi.index', compact('getContestantOverAllTotalJudge'));
     }
@@ -50,6 +50,14 @@ class SemiController extends Controller
         array_unshift($getUserJudge2nd,"");
         unset($getUserJudge2nd[0]);
         $getUserJudge2ndLength = count($getUserJudge2nd);
+
+        $getEventToArray = Event::get();
+        $getEventToArray = $getEventToArray->toArray();
+
+        $getEvent2nd = $getEventToArray;
+        array_unshift($getEvent2nd,"");
+        unset($getEvent2nd[0]);
+        $getEventLength = count($getEvent2nd);
 
         $tempChecker = 0;
         for($i = 1; $i <= $getContestantToArray2ndLength; $i++)
@@ -82,42 +90,62 @@ class SemiController extends Controller
         }
         elseif($tempChecker == 0)
         {
-            for($i = 1; $i <= $getContestantToArray2ndLength; $i++)
+            $dataArrayNi = array();
+            for($x = 1; $x <= $getEventLength; $x++)
             {
-                $overAllTotalContestantPerJudge = 0;
-                for($j = 1; $j <= $getUserJudge2ndLength; $j++)
+                for($i = 1; $i <= $getContestantToArray2ndLength; $i++)
                 {
-                    $checkContestanIfJudge = DB::table('scores')
-                        ->where('contestant_id', $getContestantToArray2nd[$i]['id'])
-                        ->where('user_id', $getUserJudge2nd[$j]['id'])
-                        ->where('overAllTotal', '!=', 0)
-                        ->get()->keyBy('user_id');
-
-                    $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge + $checkContestanIfJudge[$j+1]->overAllTotal;
-                    $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge / $getUserJudge2ndLength;
-                    $overAllTotalContestantPerJudge = round($overAllTotalContestantPerJudge, 2);
-                    if($j == $getUserJudge2ndLength)
+                    $overAllTotalContestantPerJudge = 0;
+                    for($j = 1; $j <= $getUserJudge2ndLength; $j++)
                     {
-                        $data2 = array();
-                        $data2['overAllTotalJudge'] = $overAllTotalContestantPerJudge;
-                        Score::query()
+                        $checkContestanIfJudge = DB::table('scores')
                             ->where('contestant_id', $getContestantToArray2nd[$i]['id'])
-                            ->update($data2);   
+                            ->where('user_id', $getUserJudge2nd[$j]['id'])
+                            ->where('event_id', $getEvent2nd[$x]['id'])
+                            ->get()->keyBy('event_id');
+
+                        $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge + $checkContestanIfJudge[$x]->total;
+                        if($j == $getUserJudge2ndLength)
+                        {
+                            $overAllTotalContestantPerJudge = $overAllTotalContestantPerJudge / $getUserJudge2ndLength;
+                            $overAllTotalContestantPerJudge = round($overAllTotalContestantPerJudge, 2);
+
+                            // $dataArrayNi['percentagePerEvent'] = $overAllTotalContestantPerJudge;
+                            // $dataArrayNi['percentageContestantPerEvent'] = $getContestantToArray2nd[$i]['id'];
+                            
+
+                            $getScoresPlease = DB::table('scores')
+                                ->where('contestant_id', $getContestantToArray2nd[$i]['id'])
+                                ->first();
+                            // echo "<pre>";
+                            //     print_r($getScoresPlease->overAllTotalJudge);
+                            // echo "</pre>";
+                            $data2 = array();
+                            $data2['overAllTotalJudge'] = $overAllTotalContestantPerJudge + $getScoresPlease->overAllTotalJudge;
+                            Score::query()
+                                ->where('contestant_id', $getContestantToArray2nd[$i]['id'])
+                                ->update($data2);   
+                            
+                            
+                        }
+                        
                     }
-                    // echo "<pre>";
-                    //     print_r($overAllTotalContestantPerJudge);
-                    // echo "</pre>";
+
+                    
+                    
                 }
             }
+            
+                
         }
 
-        $getContestantOverAllTotalJudge = Score::join('contestants','contestants.id','scores.contestant_id')
-                                                ->orderBy('overAllTotalJudge', 'DESC')
-                                                ->where('overAllTotalJudge', '!=', null)
-                                                ->get()
-                                                ->keyBy('overAllTotalJudge')->take(6);
+        // $getContestantOverAllTotalJudge = Score::join('contestants','contestants.id','scores.contestant_id')
+        //                                         ->orderBy('overAllTotalJudge', 'DESC')
+        //                                         ->where('overAllTotalJudge', '!=', null)
+        //                                         ->get()
+        //                                         ->keyBy('overAllTotalJudge')->take(7);
         // return $getContestantOverAllTotalJudge;
-        return view('semi.index', compact('getContestantOverAllTotalJudge'));
+        return redirect()->back()->with('success','Successfully Generate Top 6!');
     }
 
     /**
@@ -175,7 +203,31 @@ class SemiController extends Controller
     {
         $firstContestant = Contestant::where('id', $contestant_id)->first();
         $getSemiCrits = Semi::get();
-        return view('semi._showSemiScoring', compact('firstContestant', 'getSemiCrits'));
+        $ifAlreadyScore = SemiScore::where('contestant_id', $contestant_id)
+                            ->where('user_id', Auth::user()->id)
+                            ->count();
+        $getSemiCrits2nd = SemiScore::join('semis', 'semis.id', 'semi_scores.semi_id')
+                            ->where('contestant_id', $contestant_id) 
+                            ->where('user_id', Auth::user()->id)   
+                            ->select('semi_scores.score', 'semi_scores.semi_id', 'semis.name', 'semis.semi_percentage', 'semi_scores.overAllTotalJudge')
+                            ->get();
+
+        $getContestantOverAllTotalJudge = Score::join('contestants','contestants.id','scores.contestant_id')
+                            ->where('scores.contestant_id', $contestant_id)
+                            ->where('overAllTotalJudge', '!=', null)
+                            ->first();
+        $value;
+        if($ifAlreadyScore <= 0)
+        {
+            $value = 0;
+        }
+        elseif($ifAlreadyScore >= 1)
+        {
+            $value = 1;
+        }
+
+        // return $getContestantOverAllTotalJudge->overAllTotalJudge;
+        return view('semi._showSemiScoring', compact('firstContestant', 'getSemiCrits', 'value', 'getSemiCrits2nd', 'getContestantOverAllTotalJudge'));
     }
     
     public function addScoreContestantSemi($contestant_id, Request $request)

@@ -12,7 +12,10 @@
                             <i class="fa fa-align-justify"></i>
                              {{ __('Selection of Top 3 Management') }}
                         </h4>      	
+                        @role('admin')
+                        <a  target="_blank" href="{{ URL::to('/ResultbyEventTop3') }}" class="ml-5"><button class="btn btn-info "> <i class="cil-print"></i> Print</button></a>	
                         <a href="{{ URL::to('/generateTop3') }}" class="ml-auto"><button class="btn btn-primary ml-auto" style="float:right;">Generate Top 3</button></a>	
+                        @endrole
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -21,9 +24,9 @@
                                         @foreach ($getContestantOverAllTotalJudge as $getContestantOverAllTotalJudge)
                                             <div class="input-group mb-1 contestant" data-url="{{ URL::to('/showFinalContestant',$getContestantOverAllTotalJudge->contestant_id) }}">
                                                 <div class="input-group-text">
-                                                    {{ $getContestantOverAllTotalJudge->overAllTotalJudge }}%
+                                                    {{ $getContestantOverAllTotalJudge->number }}
                                                 </div>
-                                                    <input type="text" class="form-control font-weight-bold"  placeholder="{{ $getContestantOverAllTotalJudge->contestant_id }} {{ $getContestantOverAllTotalJudge->name }}" disabled >
+                                                    <input type="text" class="form-control font-weight-bold"  placeholder="{{ $getContestantOverAllTotalJudge->name }} ({{ $getContestantOverAllTotalJudge->overAllTotalJudge }}%)" disabled >
                                             </div>
                                         @endforeach
                                     </div>

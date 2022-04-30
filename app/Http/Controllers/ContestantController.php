@@ -112,7 +112,7 @@ class ContestantController extends Controller
             'number' => '',
             'educational' => '',
         ]);
-
+        
         $contestant = $contestant->update($validatedData);
         return redirect()->back()->with('success','Successfully Updated Contestant!');
     }
