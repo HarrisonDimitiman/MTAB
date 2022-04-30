@@ -9,7 +9,7 @@
           <div class="card-group">
             
             <div class="card p-4">
-            <div class="card-header" style="background-image: url('{{ asset('assets/img/bb.jpg')}}');background-repeat: no-repeat;height: 10rem; background-size: 400px 175px;">
+            <div class="card-header" style="background-image: url('{{ asset('assets/img/bb.jpg')}}');background-repeat: no-repeat;height: 10rem; background-size: 100% 100%;">
                 
                 </div>
               <div class="card-body">

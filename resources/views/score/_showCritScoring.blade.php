@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-3">
-                               <input type="number" step="0.01" class="form-control font-weight-bold text-center wd" id="scoring" name="score[]" max="{{ $criteria->crt_score }}" required>
+                               <input type="number" step="0.01" class="form-control font-weight-bold text-center wd"name="score[]" max="{{ $criteria->crt_score }}" required>
                         </div>
                     </div>
                     
@@ -46,7 +46,7 @@
         
     </div>
     @if($value == 0)
-        <button class="btn btn-primary btn-sm float-right mt-2 btn-submit helloBiboy" type="submit">Submit</button>
+        <button class="btn btn-primary btn-sm float-right mt-2 btn-submit" type="submit">Submit</button>
     @elseif ($value == 1)
         <button class="btn btn-primary btn-sm float-right mt-2" disabled>Done Scoring</button>
     @endif
@@ -55,7 +55,17 @@
 
 
 <script>
-        $(".helloBiboy").click(function(e){
+$(document).ready(function() {
+        $("form").submit(function() {
+            $(this).submit(function() {
+                return false;
+            });
+            return true;
+        });     
+    }); 
+
+
+        // $(".helloBiboy").click(function(e){
                 // var pleaseCheck = $('#formCheck').valid();
                 // console.log(pleaseCheck);
                 // if(pleaseCheck == true)
@@ -79,17 +89,17 @@
                 // }
 
              
-                var values = $("input[id='scoring']").map(function(){return $(this).val();}).get();
-                if(values == null){
-                    e.preventDefault();
-                    console.log("DILI SAKTO");
-                } else {
-                    e.preventDefault();
-                    console.log("SAKTO NI");
-                }
+            //     var values = $("input[id='scoring']").map(function(){return $(this).val();}).get();
+            //     if(values == null){
+            //         e.preventDefault();
+            //         console.log("DILI SAKTO");
+            //     } else {
+            //         e.preventDefault();
+            //         console.log("SAKTO NI");
+            //     }
 
 
                 
                 
-            });
+            // });
 </script>

@@ -12,27 +12,27 @@ class EventTableSeeder extends Seeder
         Event::create([ 
             'programs_id' => '1',
             'event_name' => 'Goddess',
-            'percentage' => '25',
+            'percentage' => '0.25',
         ]);
         Event::create([ 
             'programs_id' => '1',
             'event_name' => 'Swim Wear',
-            'percentage' => '15',
+            'percentage' => '0.15',
         ]); 
         Event::create([ 
             'programs_id' => '1',
             'event_name' => 'Cocktail',
-            'percentage' => '15',
+            'percentage' => '0.15',
         ]); 
         Event::create([ 
             'programs_id' => '1',
             'event_name' => 'Long Gown',
-            'percentage' => '15',
+            'percentage' => '0.15',
          ]); 
         Event::create([ 
             'programs_id' => '1',
             'event_name' => 'Preliminary Q and A',
-            'percentage' => '30',
+            'percentage' => '0.30',
          ]); 
     }
 }

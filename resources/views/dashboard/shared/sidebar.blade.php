@@ -11,7 +11,7 @@
 
 <ul class="c-sidebar-nav">
 <li class="c-sidebar-nav-item">
-    <a class="c-sidebar-nav-link" href="{{ route('dashboard.index') }}">
+    <a class="c-sidebar-nav-link" href="#">
       <i class="cil-speedometer c-sidebar-nav-icon"></i>
       Dashboard
     </a>

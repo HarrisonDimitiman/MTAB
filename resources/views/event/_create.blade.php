@@ -15,7 +15,7 @@
                 <input type="text" required class="form-control" name="event_name">
 
                 <label for="program">Event Percentage:</label>
-                <input type="number" required class="form-control" name="event_percentage">
+                <input type="number" step="0.01" required class="form-control" name="event_percentage">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

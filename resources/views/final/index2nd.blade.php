@@ -10,7 +10,7 @@
                         <div class="card-header d-flex">
                         <h4>
                             <i class="fa fa-align-justify"></i>
-                             {{ __('Selection of Top 6 Management') }}
+                             {{ __('Final Round Management') }}
                         </h4>      	
                         <a href="{{ URL::to('/generateFinal') }}" class="ml-auto"><button class="btn btn-primary ml-auto" style="float:right;">Generate Final</button></a>	
                         </div>

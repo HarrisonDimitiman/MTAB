@@ -13,7 +13,7 @@
                 <label for="program">Semi Criteria Name:</label>
                 <input type="text" required class="form-control" name="name">
                 <label for="program">Semi Criteria Percentage:</label>
-                <input type="number" required class="form-control" name="semi_percentage">
+                <input type="number" step="0.01" required class="form-control" name="semi_percentage">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
