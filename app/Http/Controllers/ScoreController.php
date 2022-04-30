@@ -71,6 +71,7 @@ class ScoreController extends Controller
         $getEventPercentage = Event::where('id', $event_id)->first();
         $totalEvent = $scoreSum * $getEventPercentage->percentage;
 
+        // return $scoreSum;
         for($i = 1; $i <= $crtLength; $i++)
         {
             $data = array();
